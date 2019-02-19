@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+   
+$('.clonedInput:last').hide();
+
+$('member').ready(function(){
+  $("input").change(function(){
+    alert("The text has been changed.");
+     var number = $("#member").val();
+    var e = $('.clonedInput:first');
+    $('.clonedInput').not('.clonedInput:first').remove();
+    for (i=0;i<number;i++) {
+		 var regex = /^(.*)(\d)+$/i;
+    var cloneIndex = $(".clonedInput").length;
+    
+	
+      e.show().clone().insertBefore(e)
+		.attr("id", "clonedInput" + cloneIndex)
+            .find("*")
+            .each(function () {
+                var id = this.id || "";
+                var match = id.match(regex) || [];
+                if (match.length == 3) {
+                    this.id = match[1] + (cloneIndex);
+                }
+            })
+    }
+    $('.clonedInput:last').hide();
+  });
+});
+
+</script>
+</head>
+<body>
+
+<label>Number of boxes: </label><input type="number" id="member">
+
+<div class="row">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<td>Length</td>
+				<td>Width</td>
+				<td>Height</td>
+				<td>Volumetric Weight</td>
+				<td>Total Weight</td>
+			</tr>
+		</thead>
+		<tbody class = "tbodyClone">
+			<tr id="clonedInput1" class="clonedInput">
+				<td><input id="length0" name="length" required type="text" class="form-control" placeholder="" value="" /></td>
+				<td><input id="width0" name="width" required type="text" class="form-control" placeholder="" value="" /></td>
+                <td><input id="height0" name="height" required type="text" class="form-control" placeholder="" value="" /></td>
+                <td><input id="volumetric_weight0" name="volumetric_weight" required type="text" class="form-control" placeholder="" value="" /></td>
+                <td><input id="total_weight0" name="total_weight" required type="text" class="form-control" placeholder="" value="" /></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+</body>
+</html>
